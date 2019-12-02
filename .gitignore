@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.idea/
+data_banknote_authentication.csv
 
 # C extensions
 *.so
