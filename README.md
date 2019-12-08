@@ -12,7 +12,7 @@ Random Forest and Decision Tree for classification. Implemented using NumPy.
 The data_fetcher repo should be cloned in the main directory.
 
 The package can be used to download and dump to a pickle file the [Banknote dataset](http://archive.ics.uci.edu/ml/machine-learning-databases/00266/) and the 
-[Connectionist Bench (Sonar, Mines vs. Rocks) dataset](http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks)
+[Connectionist Bench (Sonar, Mines vs. Rocks) dataset](http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks))
 from the UCI Machine Learning Repository.
 
 Datasets can be retrieved like so:
