@@ -3,31 +3,51 @@
 import numpy as np
 
 from Forest import Forest
+from dataset_fetcher.loader import load_dataset
 
-# Load banknote dataset
-# Available at http://archive.ics.uci.edu/ml/machine-learning-databases/00267/
-print('\nLoading Data Banknote Authentication Dataset...\n')
-data = np.genfromtxt('data_banknote_authentication.csv', delimiter=',')
-np.random.shuffle(data)
 
-# Input and labels
-x, y = data[:, :-1], data[:, -1]
-split = int(0.75 * x.shape[0])  # 75 % to train split
+def train_routine(dataset_name, no_trees, max_depth=8, bootstrap=None,
+                  feature_search=None):
+    # Load dataset
+    x_train, y_train, x_test, y_test, c = load_dataset(dataset_name)
 
-train_x, train_y = x[0:split], y[0:split]
-validation_x, validation_y = x[split:-1], y[split:-1]
+    # Number of features searched by split. Use square root as default.
+    if feature_search is None:
+        if no_trees > 1:
+            feature_search = int(np.sqrt(x_train.shape[1]))
+        else:
+            feature_search = x_train.shape[1]
 
-forest = Forest(max_depth=10, no_trees=3, min_samples_split=2,
-                min_samples_leaf=1, feature_search=2, bootstrap=True)
+    if bootstrap is None:
+        if no_trees > 1:
+            bootstrap = True
+        else:
+            # Do not bootstrap if only one tree is requested
+            bootstrap = False
 
-forest.train(train_x, train_y)
+    forest = Forest(max_depth=max_depth, no_trees=no_trees,
+                    min_samples_split=2, min_samples_leaf=1,
+                    feature_search=feature_search, bootstrap=bootstrap)
 
-print('\nMetrics :\n')
-print("train error      : {:7.4f} %"
-      "\nvalidation error : {:7.4f} %"
-      "\nnumber of nodes  : {:7}  "
-    .format(
-    forest.eval(train_x, train_y),
-    forest.eval(validation_x, validation_y),
-    forest.node_count()
-))
+    forest.train(x_train, y_train)
+
+    train_acc = forest.eval(x_train, y_train)
+    test_acc = forest.eval(x_test, y_test)
+    node_count = forest.node_count()
+
+    print('\nMetrics :\n')
+    print("train error      : {:7.4f} %"
+          "\nvalidation error : {:7.4f} %"
+          "\nnumber of nodes  : {:7}  "
+        .format(
+        train_acc,
+        test_acc,
+        node_count
+    ))
+
+    return train_acc, test_acc, node_count
+
+
+# Script
+if __name__ == '__main__':
+    train_routine('Banknote', 1)

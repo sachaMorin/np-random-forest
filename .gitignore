@@ -4,6 +4,10 @@ __pycache__/
 *$py.class
 .idea/
 data_banknote_authentication.csv
+dataset_fetcher/
+main.csv
+results.csv
+data/
 
 # C extensions
 *.so
