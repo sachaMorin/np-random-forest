@@ -56,7 +56,7 @@ features (2 for Banknote and 7 for Sonar). This is effectively attribute selecti
 Booststrapping, restricted search space for splitting nodes and the large amount of learners in a random forest should
 all improve performance on the holdout set.
 
-All experiments were ran 10 times and averaged. The average test error is as follows :
+All experiments were run 10 times and averaged. The average test error is as follows :
 
 Number of Trees | 1 | 64 | 128
 ----------|-------:|---------:|---:
