@@ -31,8 +31,8 @@ def train_routine(dataset_name, no_trees, max_depth=8, bootstrap=None,
 
     forest.train(x_train, y_train)
 
-    train_acc = forest.eval(x_train, y_train)
-    test_acc = forest.eval(x_test, y_test)
+    train_error = 1 - forest.eval(x_train, y_train)
+    test_error = 1 - forest.eval(x_test, y_test)
     node_count = forest.node_count()
 
     print('\nMetrics :\n')
@@ -40,12 +40,12 @@ def train_routine(dataset_name, no_trees, max_depth=8, bootstrap=None,
           "\nvalidation error : {:7.4f} %"
           "\nnumber of nodes  : {:7}  "
         .format(
-        train_acc,
-        test_acc,
+        train_error * 100,
+        test_error * 100,
         node_count
     ))
 
-    return train_acc, test_acc, node_count
+    return train_error, test_error, node_count
 
 
 # Script

@@ -50,9 +50,9 @@ class Forest:
             self._trees.append(tree)
 
     def eval(self, x, y):
-        """"Evaluate error on dataset."""
+        """"Evaluate accuracy on dataset."""
         p = self.predict(x)
-        return (1 - np.sum(p == y) / x.shape[0]) * 100
+        return np.sum(p == y) / x.shape[0]
 
     def predict(self, x):
         """Return predicted labels for given inputs."""
