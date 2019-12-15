@@ -1,5 +1,5 @@
 # np-random-forest
-Random Forest and Decision Tree for classification. Implemented using NumPy.
+Random Forest and Decision Tree for classification. Implemented from scratch using NumPy.
 
 ## Prerequisites
 
@@ -13,18 +13,18 @@ The training set held 80 % of samples. The remaining 20 % were used as a holdout
 
 Three models were tested, consisting of 1, 64 and 128 trees respectively. Maximum depth was set to 8 for all forests.
 min_samples_split and min_samples_leaf were left to their default values, that is, 2 and 1. The idea was to allow
-individual trees to overfit and confirm that larger forests would lead to better generalization.
+individual trees to overfit and confirm (yet again) that larger forests would lead to better generalization.
 
 Bootstrapping was allowed for all but the single-tree forest.
 
 The feature_search argument determines the search space when splitting a node. The single-tree model was set 
 to search all features whereas the other two models were restricted to randomly search the floored square root of the total number of 
-features (2 for Banknote and 7 for Sonar). This is effectively attribute selection at node-level.
+features (2 for Banknote and 7 for Sonar). This is effectively random attribute selection at node-level.
 
-Booststrapping, restricted search space for splitting nodes and the large amount of learners in a random forest should
+Booststrapping, restricted search space when splitting nodes and the large amount of learners in a random forest should
 all improve performance on the holdout set.
 
-All experiments were run 10 times and averaged. The average test accuracy is as follows :
+All experiments were run 10 times and averaged. The average test accuracy is as follows (both datasets have two classes) :
 
 Number of Trees | 1 | 64 | 128
 ----------|-------:|---------:|---:
@@ -38,7 +38,7 @@ Number of Trees | 1 | 64 | 128
 Banknote  |98.91 % |  100.00 % | 99.64 %
 Sonar     |80.49 % |  90.24 % | 90.24 %
 ## Usage
-The data_fetcher repo should be cloned in the main directory.
+The data_fetcher repo should be cloned in the working directory.
 
 The package can be used to download and dump to a pickle file the [Banknote dataset](http://archive.ics.uci.edu/ml/machine-learning-databases/00266/) and the 
 [Connectionist Bench (Sonar, Mines vs. Rocks) dataset](http://archive.ics.uci.edu/ml/datasets/connectionist+bench+(sonar,+mines+vs.+rocks))
